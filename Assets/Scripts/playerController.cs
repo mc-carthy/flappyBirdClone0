@@ -2,9 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class playerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
 
-	public static playerController instance;
+	public static PlayerController instance;
 
 	public bool isAlive;
 
@@ -22,6 +22,7 @@ public class playerController : MonoBehaviour {
 		MakeSingleton ();
 		flapButton = GameObject.FindGameObjectWithTag ("flapButton").GetComponent<Button> ();
 		flapButton.onClick.AddListener (() => FlapBird ());
+		SetCameraX ();
 	}
 
 	private void FixedUpdate () {
@@ -48,10 +49,6 @@ public class playerController : MonoBehaviour {
 		}
 	}
 
-	public void FlapBird () {
-		didFlap = true;
-	}
-
 	private void MakeSingleton () {
 		if (instance == null) {
 			instance = this;
@@ -59,5 +56,17 @@ public class playerController : MonoBehaviour {
 		} else {
 			Destroy (gameObject);
 		}
+	}
+
+	private void SetCameraX () {
+		CameraController.offsetX = (Camera.main.transform.position.x - transform.position.x) - 1;
+	}
+
+	public void FlapBird () {
+		didFlap = true;
+	}
+
+	public float GetPositionX () {
+		return transform.position.x;
 	}
 }
