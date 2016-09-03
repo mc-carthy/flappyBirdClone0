@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class playerController : MonoBehaviour {
@@ -14,22 +15,35 @@ public class playerController : MonoBehaviour {
 	[SerializeField]
 	private float forwardSpeed = 3f, bounceSpeed = 4f;
 	private bool didFlap;
+	private Button flapButton;
 
 	private void Awake () {
 		isAlive = true;
 		MakeSingleton ();
+		flapButton = GameObject.FindGameObjectWithTag ("flapButton").GetComponent<Button> ();
+		flapButton.onClick.AddListener (() => FlapBird ());
 	}
 
 	private void FixedUpdate () {
 		if (isAlive) {
 			Vector3 temp = transform.position;
-			temp.x += forwardSpeed * Time.fixedDeltaTime;
+			temp.x += forwardSpeed * Time.deltaTime;
 			transform.position = temp;
 
 			if (didFlap) {
 				didFlap = false;
 				rb.velocity = new Vector2 (0, bounceSpeed);
 				anim.SetTrigger ("Flap");
+			}
+
+			if (rb.velocity.y >= 0) {
+				float angle = 0;
+				angle = Mathf.Lerp (0, 45, rb.velocity.y / 4);
+				transform.rotation = Quaternion.Euler (0, 0, angle);
+			} else {
+				float angle = 0;
+				angle = Mathf.Lerp (0, -90, -rb.velocity.y / 10);
+				transform.rotation = Quaternion.Euler (0, 0, angle);
 			}
 		}
 	}
