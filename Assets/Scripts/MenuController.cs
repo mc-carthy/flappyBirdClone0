@@ -24,6 +24,14 @@ public class MenuController : MonoBehaviour {
 		}
 	}
 
+	public void ConnectOnGooglePlayGames () {
+		LeaderboardsController.instance.ConnectOrDisconnectOnGooglePlayGames ();
+	}
+
+	public void OpenLeaderboardsScore () {
+		LeaderboardsController.instance.OpenLeaderboardsScore ();
+	}
+
 	public void PlayGame () {
 		SceneFader.instance.FadeIn ("main");
 	}

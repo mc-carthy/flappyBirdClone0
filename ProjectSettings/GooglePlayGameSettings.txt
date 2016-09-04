@@ -1,0 +1,10 @@
+lastUpgrade=00934
+proj.pluginVersion=0.9.34
+proj.AppId=11526583232
+and.BundleId=com.mccarthy.bird
+proj.classDir=Assets
+proj.ConstantsClassName=Const
+and.ResourceData=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%0a%3c%21--%0aGoogle+Play+game+services+IDs.%0aSave+this+file+as+res%2fvalues%2fgames-ids.xml+in+your+project.%0a--%3e%0a%3cresources%3e%0a++%3cstring+name%3d%22app_id%22%3e11526583232%3c%2fstring%3e%0a++%3cstring+name%3d%22package_name%22%3ecom.mccarthy.bird%3c%2fstring%3e%0a++%3cstring+name%3d%22achievement_you_started_the_game%22%3eCggIwOem-CoQAhAB%3c%2fstring%3e%0a++%3cstring+name%3d%22achievement_you_started_the_game_twice.%22%3eCggIwOem-CoQAhAC%3c%2fstring%3e%0a++%3cstring+name%3d%22achievement_you_started_the_game_three_times%22%3eCggIwOem-CoQAhAD%3c%2fstring%3e%0a++%3cstring+name%3d%22achievement_four_times...%22%3eCggIwOem-CoQAhAF%3c%2fstring%3e%0a++%3cstring+name%3d%22achievement_last_one%22%3eCggIwOem-CoQAhAG%3c%2fstring%3e%0a++%3cstring+name%3d%22leaderboard_score%22%3eCggIwOem-CoQAhAH%3c%2fstring%3e%0a%3c%2fresources%3e
+and.ClientId=
+proj.requireGPlus=false
+android.SetupDone=true
