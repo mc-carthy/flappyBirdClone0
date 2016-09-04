@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
 	public static PlayerController instance;
 
 	public bool isAlive;
+	public int score;
 
 	[SerializeField]
 	private Rigidbody2D rb;
@@ -14,6 +15,10 @@ public class PlayerController : MonoBehaviour {
 	private Animator anim;
 	[SerializeField]
 	private float forwardSpeed = 3f, bounceSpeed = 4f;
+	[SerializeField]
+	private AudioSource audioSource;
+	[SerializeField]
+	private AudioClip flapClip, pointClip, dieClip;
 	private bool didFlap;
 	private Button flapButton;
 
@@ -34,6 +39,7 @@ public class PlayerController : MonoBehaviour {
 			if (didFlap) {
 				didFlap = false;
 				rb.velocity = new Vector2 (0, bounceSpeed);
+				audioSource.PlayOneShot (flapClip);
 				anim.SetTrigger ("Flap");
 			}
 
@@ -46,6 +52,20 @@ public class PlayerController : MonoBehaviour {
 				angle = Mathf.Lerp (0, -90, -rb.velocity.y / 10);
 				transform.rotation = Quaternion.Euler (0, 0, angle);
 			}
+		}
+	}
+
+	private void OnCollisionEnter2D (Collision2D col) {
+		if (col.gameObject.tag == "ground" || col.gameObject.tag == "pipe") {
+			if (isAlive) {
+				Die ();
+			}
+		}
+	}
+
+	private void OnTriggerEnter2D (Collider2D trig) {
+		if (trig.tag == "pipeHolder") {
+			ScorePoint ();
 		}
 	}
 
@@ -62,8 +82,22 @@ public class PlayerController : MonoBehaviour {
 		CameraController.offsetX = (Camera.main.transform.position.x - transform.position.x) - 1;
 	}
 
+	private void Die () {
+		isAlive = false;
+		anim.SetTrigger("Die");
+		audioSource.PlayOneShot (dieClip);
+	}
+
+	private void ScorePoint () {
+		audioSource.PlayOneShot (pointClip);
+		score++;
+	}
+
 	public void FlapBird () {
-		didFlap = true;
+		if (!isAlive) {
+			didFlap = true;
+			audioSource.PlayOneShot (flapClip);
+		}	
 	}
 
 	public float GetPositionX () {
