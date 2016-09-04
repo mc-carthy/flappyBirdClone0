@@ -42,7 +42,7 @@ public class SceneFader : MonoBehaviour {
 
 	private IEnumerator FadeOutAnimation () {
 		fadeAnim.Play ("fadeOut");
-		yield return new WaitForSeconds (1f);
+		yield return new WaitForSeconds (0.7f);
 		fadeCanvas.SetActive (false);
 	}
 }

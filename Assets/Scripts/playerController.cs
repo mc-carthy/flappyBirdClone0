@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+
 	private void SetCameraX () {
 		CameraController.offsetX = (Camera.main.transform.position.x - transform.position.x) - 1;
 	}
@@ -86,11 +87,13 @@ public class PlayerController : MonoBehaviour {
 		isAlive = false;
 		anim.SetTrigger("Die");
 		audioSource.PlayOneShot (dieClip);
+		GamePlayController.instance.PlayerDiedSetScore (score);
 	}
 
 	private void ScorePoint () {
 		audioSource.PlayOneShot (pointClip);
 		score++;
+		GamePlayController.instance.SetScore (score);
 	}
 
 	public void FlapBird () {
