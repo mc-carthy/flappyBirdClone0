@@ -10,7 +10,7 @@ public class MenuController : MonoBehaviour {
 	private bool isGreenBirdUnlocked, isRedBirdUnlocked;
 
 	private void Awake () {
-		MakeSingleton ();
+		MakeInstance ();
 	}
 
 	private void Start () {
@@ -18,12 +18,9 @@ public class MenuController : MonoBehaviour {
 		CheckIfBirdsAreUnlocked ();
 	}
 
-	private void MakeSingleton () {
+	private void MakeInstance () {
 		if (instance == null) {
 			instance = this;
-			DontDestroyOnLoad (gameObject);
-		} else {
-			Destroy(gameObject);
 		}
 	}
 

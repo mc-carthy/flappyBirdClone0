@@ -24,13 +24,16 @@ public class PlayerController : MonoBehaviour {
 
 	private void Awake () {
 		isAlive = true;
-		MakeSingleton ();
+		MakeInstance ();
 		flapButton = GameObject.FindGameObjectWithTag ("flapButton").GetComponent<Button> ();
-		flapButton.onClick.AddListener (() => FlapBird ());
+		//if (this.isActiveAndEnabled) {
+			flapButton.onClick.AddListener (() => FlapBird ());
+		//}
 		SetCameraX ();
 	}
 
 	private void FixedUpdate () {
+
 		if (isAlive) {
 			Vector3 temp = transform.position;
 			temp.x += forwardSpeed * Time.deltaTime;
@@ -69,12 +72,9 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	private void MakeSingleton () {
+	private void MakeInstance () {
 		if (instance == null) {
 			instance = this;
-			DontDestroyOnLoad (gameObject);;
-		} else {
-			Destroy (gameObject);
 		}
 	}
 
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void FlapBird () {
-		if (!isAlive) {
+		if (isAlive) {
 			didFlap = true;
 			audioSource.PlayOneShot (flapClip);
 		}	

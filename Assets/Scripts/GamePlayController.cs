@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -26,19 +25,16 @@ public class GamePlayController : MonoBehaviour {
 	private Image medalImage;
 
 	private void Awake () {
-		MakeSingleton ();
+		MakeInstance ();
 		Time.timeScale = 0f;
 	}
 
-	private void MakeSingleton () {
+	private void MakeInstance () {
 		if (instance == null) {
 			instance = this;
-			DontDestroyOnLoad (gameObject);
-		} else {
-			Destroy (gameObject);
 		}
 	}
-
+		
 	public void PauseGame () {
 		if (PlayerController.instance != null) {
 			if (PlayerController.instance.isAlive) {
@@ -54,12 +50,12 @@ public class GamePlayController : MonoBehaviour {
 	}
 
 	public void ResumeGame () {
-		pausePanel.SetActive (true);
+		pausePanel.SetActive (false);
 		Time.timeScale = 1f;
 	}
 
 	public void RestartGame () {
-		SceneFader.instance.FadeIn ("main");
+		Application.LoadLevel (Application.loadedLevel);
 	}
 
 	public void GoToMenuButton () {
