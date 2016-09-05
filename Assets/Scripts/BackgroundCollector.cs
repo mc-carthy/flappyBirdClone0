@@ -33,6 +33,7 @@ public class BackgroundCollector : MonoBehaviour {
 			Vector3 temp = trig.transform.position;
 			float width = ((BoxCollider2D)(trig)).size.x;
 			temp.x = lastBackgroundX + width;
+			temp.y = 0f;
 			trig.transform.position = temp;
 			lastBackgroundX = temp.x;
 		} else if (trig.tag == "ground") {
