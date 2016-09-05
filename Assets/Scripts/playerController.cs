@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour {
 		anim.SetTrigger("Die");
 		audioSource.PlayOneShot (dieClip);
 		GamePlayController.instance.PlayerDiedSetScore (score);
+		AdsController.instance.ShowInterstital ();
 	}
 
 	private void ScorePoint () {
